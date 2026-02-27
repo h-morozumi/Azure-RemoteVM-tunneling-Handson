@@ -1,0 +1,9 @@
+{
+  "resourcesResourceGroups": "rg-",
+  "networkVirtualNetworks": "vnet-",
+  "networkNetworkSecurityGroups": "nsg-",
+  "networkPublicIPAddresses": "pip-",
+  "networkNetworkInterfaces": "nic-",
+  "networkBastionHosts": "bas-",
+  "computeVirtualMachines": "vm-"
+}

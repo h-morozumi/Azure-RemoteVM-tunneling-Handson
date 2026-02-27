@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "Bicep AVM Mastery": {
+      "source": "fabioc-aloha/lithium",
+      "sourceType": "github",
+      "computedHash": "07a83cd73ce4d87b8702baf303a560e6a84d86f4e0f0cfb2a1c77909eb6001ab"
+    }
+  }
+}
