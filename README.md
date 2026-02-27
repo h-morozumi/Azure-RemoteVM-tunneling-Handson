@@ -184,6 +184,12 @@ ssh azureuser@localhost -p 2222
 └── README.md
 ```
 
+## 管理者向け: 複数ユーザ一括構築
+
+300人規模のハンズオンを Hub & Spoke 構成で一括構築する方法については、以下のガイドを参照してください。
+
+**[複数ユーザ一括構築ガイド（管理者向け）](docs/bulk-deploy-guide.md)**
+
 ## 参考リンク
 
 - [Azure Bastion トンネル機能を使ってローカルポートを転送する](https://learn.microsoft.com/ja-jp/azure/bastion/connect-ip-address)
