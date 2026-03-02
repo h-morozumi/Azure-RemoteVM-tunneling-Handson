@@ -190,6 +190,63 @@ ssh azureuser@localhost -p 2222
 
 **[複数ユーザ一括構築ガイド（管理者向け）](docs/bulk-deploy-guide.md)**
 
+## セルフホステッド: ARM テンプレートから直接デプロイ
+
+`azd` を使わずに、Azure ポータルから直接 ARM テンプレートをデプロイすることもできます。
+
+### ARM テンプレートの生成
+
+Bicep ファイルから ARM テンプレート（JSON）を生成するには、以下のいずれかのコマンドを実行します:
+
+**Bicep CLI を使う場合:**
+
+```bash
+bicep build infra/main.bicep
+```
+
+**Azure CLI を使う場合:**
+
+```bash
+az bicep build --file infra/main.bicep
+```
+
+これにより `infra/main.json` が生成されます。（本リポジトリには生成済みのファイルが含まれています）
+
+### デプロイ手順
+
+以下のボタンをクリックすると、Azure ポータルのカスタムデプロイ画面が開きます。
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fh-morozumi%2FAzure-RemoteVM-tunneling-Handson%2Fmain%2Finfra%2Fmain.json)
+
+### パラメータの設定
+
+デプロイ画面で以下のパラメータを設定してください:
+
+| パラメータ | 説明 | 既定値 |
+|---|---|---|
+| **Subscription** | 使用する Azure サブスクリプション | — |
+| **Resource Group** | 新規作成または既存のリソースグループを選択 | — |
+| **Region** | デプロイ先のリージョン（例: `Japan East`） | — |
+| **Environment Name** | リソース名の一部として使用される環境名（1〜64文字） | — |
+| **Admin Username** | Linux VM の管理者ユーザー名 | `azureuser` |
+| **Admin Password** | Linux VM の管理者パスワード | — |
+| **Vm Size** | VM のサイズ | `Standard_B2s` |
+
+> **パスワード要件**: 12文字以上、大文字・小文字・数字・記号のうち3種類以上を含むこと
+
+### デプロイの流れ
+
+1. 上記の「**Deploy to Azure**」ボタンをクリック
+2. Azure ポータルにログイン（未ログインの場合）
+3. カスタムデプロイ画面で各パラメータを入力
+4. 「**確認と作成**」→「**作成**」をクリック
+5. デプロイが完了するまで約 10〜15 分待機（Bastion の作成に時間がかかります）
+6. デプロイ完了後、「出力」タブから `BASTION_TUNNEL_COMMAND` などの情報を確認
+
+デプロイ完了後は、[Step 4: Bastion トンネルを開始](#step-4-bastion-トンネルを開始) から同様の手順で操作できます。
+
+> **リソースの削除**: Azure ポータルからデプロイしたリソースグループを削除してください。
+
 ## 参考リンク
 
 - [Azure Bastion トンネル機能を使ってローカルポートを転送する](https://learn.microsoft.com/ja-jp/azure/bastion/connect-ip-address)
